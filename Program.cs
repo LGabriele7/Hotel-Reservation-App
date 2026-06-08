@@ -5,7 +5,7 @@
         static List<User> users = new List<User>(); 
         static List<Room> rooms = new List<Room> (); 
 
-        static void Main(string[] args)
+        static void Main(string[] args) 
         {
             int option;
             bool running = true;
