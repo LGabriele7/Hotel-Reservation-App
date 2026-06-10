@@ -12,3 +12,5 @@ namespace Hotel_Reservation_App
         public string CheckOutDate { get; set; }
     }
 }
+}// end of class
+}// end of namespace
