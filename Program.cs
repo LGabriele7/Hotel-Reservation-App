@@ -9,7 +9,9 @@ namespace Hotel_Reservation_App
         {
             new Admin {Username = "admin", Password = "admin"}
         };
-       
+        //Code for the booking list
+        public static List<Booking> bookingList = new List<Booking>();
+
         static void Main(string[] args)
         {
             int option;

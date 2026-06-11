@@ -10,7 +10,5 @@ namespace Hotel_Reservation_App
         public int RoomNumber { get; set; }
         public string CheckInDate { get; set; }
         public string CheckOutDate { get; set; }
-    }
-}
-}// end of class
+    }//end of class
 }// end of namespace

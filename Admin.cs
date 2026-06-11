@@ -27,6 +27,8 @@ namespace Hotel_Reservation_App
                         ManageRooms();
                         break;
                     case 2:
+                        Console.WriteLine("\n------Manage Booking------");
+                        ManageBooking();
                         break;
                     case 99:
                         Console.WriteLine("Goodbye!!!");
@@ -78,7 +80,29 @@ namespace Hotel_Reservation_App
                         break;
                 }
             }while (true);
-        }
-    }
-}
+        }//end of ManageRooms
+
+        //Start of ManageBooking Method
+        public void ManageBooking()
+        {
+            Console.WriteLine("\n----- BOOKINGS -----");
+
+            if (Program.bookingList.Count == 0)
+            {
+                Console.WriteLine("No bookings found.");
+                return;
+            }
+
+            foreach (Booking booking in Program.bookingList)
+            {
+                Console.WriteLine($"Guest Name: {booking.GuestName}");
+                Console.WriteLine($"Room Number: {booking.RoomNumber}");
+                Console.WriteLine($"Check-In Date: {booking.CheckInDate}");
+                Console.WriteLine($"Check-Out Date: {booking.CheckOutDate}");
+                Console.WriteLine("---------------------------");
+            }
+        }//end of ManageBooking
+
+    }//end of class
+}//end of namespace
  
