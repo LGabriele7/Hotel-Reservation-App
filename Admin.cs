@@ -55,6 +55,7 @@ namespace Hotel_Reservation_App
             {
                 try
                 {
+                    Console.WriteLine("\n----- MANAGE ROOMS -----");
                     Console.WriteLine("1. View Room");
                     Console.WriteLine("2. Add Room");
                     Console.WriteLine("3. Remove Room");
