@@ -31,7 +31,7 @@ namespace Hotel_Reservation_App
             Console.WriteLine($"\nRoom Type: {RoomType}");
             Console.WriteLine($"Room No: {RoomNo}");
             RoomAvailability();
-            Console.WriteLine($"Price: {RoomPrice}");
+            Console.WriteLine($"Price Per Night: ${RoomPrice:F2}");
         }
 
 
