@@ -209,8 +209,7 @@ namespace Hotel_Reservation_App
             }
 
             Booking booking = Program.bookingList
-                .Find(b => b.GuestName == guestName &&
-                           b.RoomNumber == roomNo);
+                .Find(b => b.GuestName == guestName && b.RoomNumber == roomNo);
 
             if (booking != null)
             {
