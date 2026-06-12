@@ -10,5 +10,6 @@ namespace Hotel_Reservation_App
         public int RoomNumber { get; set; }
         public string CheckInDate { get; set; }
         public string CheckOutDate { get; set; }
+        public decimal TotalPrice { get; set; }
     }//end of class
 }// end of namespace
