@@ -104,11 +104,12 @@ namespace Hotel_Reservation_App
 
             do
             {
-                Console.WriteLine("\n----- MANAGE BOOKING -----");
                 Console.WriteLine("1. View Booking");
-                Console.WriteLine("2. Search Booking");
-                Console.WriteLine("3. Delete Booking");
-                Console.WriteLine("4. Return to Admin Menu");
+                Console.WriteLine("2. Add Booking");
+                Console.WriteLine("3. Search Booking");
+                Console.WriteLine("4. Delete Booking");
+                Console.WriteLine("5. Return to Admin Menu");
+                Console.WriteLine("99. Exit");
 
                 Console.Write("Select Option: ");
 
@@ -125,14 +126,23 @@ namespace Hotel_Reservation_App
                         break;
 
                     case 2:
-                        SearchBooking();
+                        AddBooking();
                         break;
 
                     case 3:
-                        DeleteBooking();
+                        SearchBooking();
                         break;
 
                     case 4:
+                        DeleteBooking();
+                        break;
+
+                    case 5:
+                        return;
+
+                    case 99:
+                        Console.WriteLine("Goodbye!!!");
+                        Environment.Exit(0);
                         return;
 
                     default:
@@ -142,6 +152,91 @@ namespace Hotel_Reservation_App
 
             } while (true);
         }// end of Manage Booking method
+
+        //Start of Add Booking Method
+        public void AddBooking()
+        {
+            Console.WriteLine("\n----- ADD BOOKING -----");
+
+            Booking booking = new Booking();
+
+            // Guest Name
+            Console.Write("Guest Name: ");
+            booking.GuestName = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(booking.GuestName))
+            {
+                Console.WriteLine("Guest name cannot be empty.");
+                return;
+            }
+
+            // Room Number
+            Console.Write("Room Number: ");
+
+            if (!int.TryParse(Console.ReadLine(), out int roomNo))
+            {
+                Console.WriteLine("Invalid room number.");
+                return;
+            }
+
+            booking.RoomNumber = roomNo;
+
+            // Check if room exists
+            Room room = roomList.Find(r => r.RoomNo == booking.RoomNumber);
+
+            if (room == null)
+            {
+                Console.WriteLine("Room not found!");
+                return;
+            }
+
+            Console.WriteLine($"Price Per Night: {room.RoomPrice:C}");
+
+            // Check-In Date
+            Console.Write("Check-In Date (dd/MM/yyyy): ");
+
+            DateTime checkIn;
+
+            if (!DateTime.TryParse(Console.ReadLine(), out checkIn))
+            {
+                Console.WriteLine("Invalid date!");
+                return;
+            }
+
+            booking.CheckInDate = checkIn.ToString("dd/MM/yyyy");
+
+            // Check-Out Date
+            Console.Write("Check-Out Date (dd/MM/yyyy): ");
+
+            DateTime checkOut;
+
+            if (!DateTime.TryParse(Console.ReadLine(), out checkOut))
+            {
+                Console.WriteLine("Invalid date!");
+                return;
+            }
+
+            if (checkOut <= checkIn)
+            {
+                Console.WriteLine("Check-out date must be after the check-in date.");
+                return;
+            }
+
+            booking.CheckOutDate = checkOut.ToString("dd/MM/yyyy");
+
+            // Calculate Total Price
+            int nights = (checkOut - checkIn).Days;
+
+            booking.TotalPrice = nights * room.RoomPrice;
+
+            Console.WriteLine($"Number of Nights: {nights}");
+            Console.WriteLine($"Total Price: {booking.TotalPrice:C}");
+
+            // Save Booking
+            Program.bookingList.Add(booking);
+
+            Console.WriteLine("Booking added successfully!");
+        }//end of Add Booking Method
 
         //View Booking Method
         public void ViewBooking()
