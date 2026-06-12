@@ -5,33 +5,46 @@ using System.Text;
 
 namespace Hotel_Reservation_App
 {
-    internal class Customer : User
+    internal class Customer : User 
     {
+        static int option;
+
+        //customer menu
         public override void Menu()
         {
-            int option;
             do
             {
-                Console.WriteLine("----------CUSTOMER MENU----------\n");
-                Console.WriteLine("1. View Rooms");
-                Console.WriteLine("2. Create Booking");
-                Console.WriteLine("99. Exit");
-                Console.Write("Select Option: ");
-                option = Convert.ToInt32(Console.ReadLine());
-
-                switch (option)
+                try
                 {
-                    case 1:
-                        ViewRooms();
-                        break;
-                    case 2:
-                        CreateBooking();
-                        break;
-                    case 99:
-                        Console.WriteLine("Goodbye!!!");
-                        Environment.Exit(0);
-                        return;
 
+                    Console.WriteLine("----------CUSTOMER MENU----------\n");
+                    Console.WriteLine("1. View Rooms");
+                    Console.WriteLine("2. Create Booking");
+                    Console.WriteLine("99. Exit");
+                    Console.Write("Select Option: ");
+                    option = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("------------------------------------");
+
+                    switch (option)
+                    {
+                        case 1:
+                            ViewRooms();
+                            break;
+                        case 2:
+                            CreateBooking();
+                            break;
+                        case 99:
+                            Console.WriteLine("Goodbye!!!");
+                            Environment.Exit(0);
+                            return;
+                        default:
+                            Console.WriteLine("Please select a valid menu option");
+                            break;
+                    }
+                } 
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid input. Please enter a number.");
                 }
             }while (option != 99);
 
@@ -66,10 +79,10 @@ namespace Hotel_Reservation_App
 
             Console.Write("Check-Out Date: ");
             booking.CheckOutDate = Console.ReadLine();
-
+            room.RoomIsAvailable = false; 
             Program.bookingList.Add(booking);
 
             Console.WriteLine("Booking created successfully!");
         }//end of create booking method
-    }
-}
+    }//end of customer class
+}//end of namespace

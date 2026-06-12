@@ -9,7 +9,7 @@ namespace Hotel_Reservation_App
 
     abstract class User : Room
     {
-
+        public static string userChoice;
         //fileds
         private string username;
         private string password;
@@ -29,19 +29,30 @@ namespace Hotel_Reservation_App
 
         public void ViewRooms()
         {
+            Console.WriteLine("----- ROOMS -----");
             foreach (Room u in roomList)
             {
                 u.DisplayRooms();
             }
-
+            Console.Write("Do you want to continue? (yes/no): ");
+            userChoice = Console.ReadLine().ToLower();
+            if ( userChoice == "yes" )
+            {
+                return;
+            }
+            else
+            {
+                Console.WriteLine("Goodbye!");
+                Environment.Exit(0);
+            }
         }//end of ViewRooms
 
         
         public void AddRooms()
         {
-            try
+            do
             {
-                do
+                try
                 {
                     Console.Write("Enter Room Type:");
                     string roomType = Console.ReadLine();
@@ -58,14 +69,31 @@ namespace Hotel_Reservation_App
 
                     roomList.Add(room);
                     Console.WriteLine("New Room Recorded");
-                    break;
+                    Console.Write("Do you want to continue? (yes/no): ");
+                    userChoice = Console.ReadLine().ToLower();
+                    if (userChoice == "yes")
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Goodbye!");
+                        Environment.Exit(0);
+                    }
 
-                } while (true);
-            }
-            catch(Exception)
-            {
-                Console.WriteLine("Error");
-            }
+
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Please enter the correct input.");
+                }
+                catch (ArgumentNullException)
+                {
+                    Console.WriteLine("Input cannot be null.");
+                }
+
+
+            } while (true);
 
         }//end of Addrooms
 
@@ -84,6 +112,18 @@ namespace Hotel_Reservation_App
             {
                 Console.WriteLine("Room not found!");
             }
+            Console.Write("Do you want to continue? (yes/no): ");
+            userChoice = Console.ReadLine().ToLower();
+            if (userChoice == "yes")
+            {
+                return;
+            }
+            else
+            {
+                Console.WriteLine("Goodbye!");
+                Environment.Exit(0);
+            }
+
 
         }//end of RemoveRooms
 
@@ -114,10 +154,18 @@ namespace Hotel_Reservation_App
             {
                 Console.WriteLine("Room not found!");
             }
+            Console.Write("Do you want to continue? (yes/no): ");
+            userChoice = Console.ReadLine().ToLower();
+            if (userChoice == "yes")
+            {
+                return;
+            }
+            else
+            {
+                Console.WriteLine("Goodbye!");
+                Environment.Exit(0);
+            }
         }//end of update Rooms
-        
-
-        
 
 
 
@@ -125,5 +173,8 @@ namespace Hotel_Reservation_App
 
 
 
-    } 
-}
+
+
+
+    } //end of class
+}//end of namespace
