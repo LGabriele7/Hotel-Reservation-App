@@ -66,6 +66,8 @@ namespace Hotel_Reservation_App
                 return;
             }
 
+            booking.RoomNumber = roomNo;
+
             Room room = roomList.Find(r => r.RoomNo == booking.RoomNumber);
 
             if (room == null)
@@ -73,14 +75,48 @@ namespace Hotel_Reservation_App
                 Console.WriteLine("Room not found!");
                 return;
             }
+            Console.WriteLine($"Price Per Night: {room.RoomPrice:C}");
 
-            Console.WriteLine($"Price: {room.RoomPrice}");
+            Console.Write("Check-In Date (dd/MM/yyyy): ");
 
-            Console.Write("Check-In Date: ");
-            booking.CheckInDate = Console.ReadLine();
+            DateTime checkIn;
 
-            Console.Write("Check-Out Date: ");
-            booking.CheckOutDate = Console.ReadLine();
+            if (!DateTime.TryParse(Console.ReadLine(), out checkIn))
+            {
+                Console.WriteLine("Invalid date! Please enter a valid date.");
+                return;
+            }
+
+            booking.CheckInDate = checkIn.ToString("dd/MM/yyyy");
+
+            Console.Write("Check-Out Date (dd/MM/yyyy): ");
+
+            DateTime checkOut;
+
+            if (!DateTime.TryParse(Console.ReadLine(), out checkOut))
+            {
+                Console.WriteLine("Invalid date! Please enter a valid date.");
+                return;
+            }
+
+            booking.CheckOutDate = checkOut.ToString("dd/MM/yyyy");
+
+            if (checkOut <= checkIn)
+            {
+                Console.WriteLine("Check-out date must be after the check-in date.");
+                return;
+            }
+
+            booking.CheckOutDate = checkOut.ToString("dd/MM/yyyy");
+
+            // Calculate number of nights
+            int nights = (checkOut - checkIn).Days;
+
+            // Calculate total price
+            booking.TotalPrice = nights * room.RoomPrice;
+
+            Console.WriteLine($"Number of Nights: {nights}");
+            Console.WriteLine($"Total Price: {booking.TotalPrice:C}");
 
             Program.bookingList.Add(booking);
 

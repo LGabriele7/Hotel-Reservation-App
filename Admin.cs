@@ -154,6 +154,7 @@ namespace Hotel_Reservation_App
                 Console.WriteLine($"Room Number: {booking.RoomNumber}");
                 Console.WriteLine($"Check-In Date: {booking.CheckInDate}");
                 Console.WriteLine($"Check-Out Date: {booking.CheckOutDate}");
+                Console.WriteLine($"Total Price: {booking.TotalPrice:C}");
             }
         }//end of method
 
