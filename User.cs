@@ -19,11 +19,7 @@ namespace Hotel_Reservation_App
         public string Password { get { return password; } set { password = value; } }
 
 
-        public void UserDisplay()
-        {
-            Console.WriteLine($"Username: {Username}");
-            Console.WriteLine($"Password: {Password}\n");
-        }
+       
         public abstract void Menu();
 
 
