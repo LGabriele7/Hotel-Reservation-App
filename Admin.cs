@@ -23,21 +23,24 @@ namespace Hotel_Reservation_App
                     Console.Write("Select Option: ");
                     option = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("------------------------------------");
-
-                switch (option)
-                {
-                    case 1:
-                        ManageRooms();
-                        break;
-                    case 2:
-                        ManageBooking();
-                        break;
-                    case 99:
-                        Console.WriteLine("Goodbye!!!");
-                        Environment.Exit(0);
-                        break;
+                    switch (option)
+                    {
+                        case 1:
+                            ManageRooms();
+                            break;
+                        case 2:
+                            ManageBooking();
+                            break;
+                        case 99:
+                            Console.WriteLine("Goodbye!!!");
+                            Environment.Exit(0);
+                            break;
+                        default:
+                            Console.WriteLine("Please select a valid menu option");
+                            break;
 
                     }
+
                 }
                 catch (FormatException)
                 {
