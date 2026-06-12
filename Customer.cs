@@ -17,7 +17,11 @@ namespace Hotel_Reservation_App
                 Console.WriteLine("2. Create Booking");
                 Console.WriteLine("99. Exit");
                 Console.Write("Select Option: ");
-                option = Convert.ToInt32(Console.ReadLine());
+                if (!int.TryParse(Console.ReadLine(), out option))
+                {
+                    Console.WriteLine("Invalid input! Please enter a number.");
+                    continue;
+                }
 
                 switch (option)
                 {
@@ -48,8 +52,19 @@ namespace Hotel_Reservation_App
             Console.Write("Guest Name: ");
             booking.GuestName = Console.ReadLine();
 
+            if (string.IsNullOrWhiteSpace(booking.GuestName))
+            {
+                Console.WriteLine("Guest name cannot be empty.");
+                return;
+            }
+
             Console.Write("Room Number: ");
-            booking.RoomNumber = Convert.ToInt32(Console.ReadLine());
+
+            if (!int.TryParse(Console.ReadLine(), out int roomNo))
+            {
+                Console.WriteLine("Invalid room number.");
+                return;
+            }
 
             Room room = roomList.Find(r => r.RoomNo == booking.RoomNumber);
 
